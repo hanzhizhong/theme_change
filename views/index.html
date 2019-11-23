@@ -1,0 +1,45 @@
+{{extend './components/_layout.html'}}
+{{block 'style'}}
+    <style>
+        .color-pick{
+            float:right;
+
+        }
+    </style>
+{{/block}}
+{{block 'content'}}
+<div class="box1">
+    <span>primary1</span>
+    <span>primary2</span>
+    <span>primary3</span>
+</div>
+<div class="box2">
+    <span>green</span>
+    <span>blue</span>
+    <span>yello</span>
+    <span>default</span>
+</div>
+<div class="color-pick">
+    <input type="color" name="colorpick" onchange="pickUpColor(event)" value="{{color}}">
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script>
+    function pickUpColor(e) {
+        let sPrimary = e.target.value
+        if (sPrimary != '#ffffff' || sPrimary != '') {
+            
+            axios.post('http://localhost:9000/color',{'color':sPrimary}).then(ret=>{
+                if(ret.data.err==0){
+                    window.location.href="/"
+                }
+            }).catch(err=>{
+                console.log('err',err)
+            })
+        }
+
+    }
+</script>
+
+{{/block}}
