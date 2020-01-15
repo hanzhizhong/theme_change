@@ -19,7 +19,7 @@ app.get('/',(req,res)=>{
             console.log(err);
             return 
         }
-        let options={}
+        let options={} 
         let aColor=data.toString().split(';')
         aColor.forEach((item,index)=>{
             if(/\n*\s*/gi.test(item) && item.replace(/\n*\s*/gi,'')){
